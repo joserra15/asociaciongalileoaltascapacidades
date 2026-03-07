@@ -414,3 +414,38 @@ body{
    <div class="bg-blobs" aria-hidden="true"></div>
    colócala justo después de <body> para el fondo decorativo.
    ----------------------------- */
+
+
+.card:hover {
+transform: translateY(-8px) scale(1.02);
+}
+
+.bg-pattern{
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:0.04;
+
+background-image:
+url("assets/formulas.svg");
+
+background-size:600px;
+z-index:0;
+}
+
+.hero-card img{
+transition: transform .5s ease;
+}
+
+.hero-card:hover img{
+transform: scale(1.05);
+}
+
+.callout img{
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:transform .3s ease;
+}
+
+.callout img:hover{
+transform:scale(1.05);
+}
