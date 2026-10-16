@@ -493,8 +493,9 @@
   /* ---------- 5. Torres de Hanoi ---------- */
   function playHanoi(body) {
     const DISKS = 4;
-    const COLORS = ["#d4920a", "#1a6b6b", "#2a4a7a", "#8b4513", "#5a7a3a"];
-    const WIDTHS = [100, 80, 60, 40, 28];
+    const COLORS = ["#d4920a", "#1a6b6b", "#2a4a7a", "#8b4513"];
+    /* disk 1 = smallest, disk N = largest */
+    const WIDTHS = [36, 52, 68, 84];
     let pegs = [[], [], []];
     let selected = null;
     let moves = 0;
