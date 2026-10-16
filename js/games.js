@@ -321,13 +321,26 @@
     ];
     let round = 0;
     let score = 0;
+    let locked = false;
 
     const display = el("div", "pattern-display");
     const choices = el("div", "choice-row");
     ui.board.appendChild(display);
     ui.board.appendChild(choices);
 
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+      }
+      return a;
+    }
+
     function load() {
+      locked = false;
       const p = patterns[round % patterns.length];
       ui.status.textContent = "Aciertos " + score + " · Ronda " + (round + 1);
       display.innerHTML = "";
@@ -341,11 +354,18 @@
       });
       choices.innerHTML = "";
       setFeedback(ui.feedback, "¿Qué completa el patrón?", "");
-      p.choices.forEach((c) => {
-        const b = el("button", "choice-btn", c);
+      if (document.activeElement && document.activeElement.blur) {
+        document.activeElement.blur();
+      }
+      shuffle(p.choices).forEach((c) => {
+        const b = el("button", "choice-btn");
         b.type = "button";
+        b.textContent = c;
         b.addEventListener("click", () => {
+          if (locked) return;
+          b.blur();
           if (c === p.answer) {
+            locked = true;
             b.classList.add("correct");
             score++;
             setFeedback(ui.feedback, "¡Correcto!", "ok");
@@ -677,22 +697,42 @@
     ];
     let i = 0;
     let score = 0;
+    let locked = false;
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let j = a.length - 1; j > 0; j--) {
+        const k = Math.floor(Math.random() * (j + 1));
+        const t = a[j];
+        a[j] = a[k];
+        a[k] = t;
+      }
+      return a;
+    }
 
     function load() {
+      locked = false;
       const item = items[i % items.length];
       ui.status.textContent = "Aciertos " + score;
       ui.board.innerHTML = "";
+      if (document.activeElement && document.activeElement.blur) {
+        document.activeElement.blur();
+      }
       const q = el("div", "pattern-display");
       q.style.fontSize = "1.25rem";
       q.textContent = item.q;
       ui.board.appendChild(q);
       const row = el("div", "choice-row");
-      item.opts.forEach((o) => {
-        const b = el("button", "choice-btn", o);
+      shuffle(item.opts).forEach((o) => {
+        const b = el("button", "choice-btn");
         b.type = "button";
+        b.textContent = o;
         b.style.fontSize = "1rem";
         b.addEventListener("click", () => {
+          if (locked) return;
+          b.blur();
           if (o === item.a) {
+            locked = true;
             b.classList.add("correct");
             score++;
             setFeedback(ui.feedback, "¡Correcto!", "ok");
