@@ -3,21 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contacto • Asociación Galileo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Contacto | Asociación Galileo Altas Capacidades</title>
+  <meta name="description" content="Contacta con la Asociación Galileo de altas capacidades en Mancha Centro. Te escuchamos por Instagram." />
+  <link rel="canonical" href="https://asociaciongalileoaltascapacidades.es/contacto.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto | Asociación Galileo" />
+  <meta property="og:description" content="Escríbenos para actividades, orientación o colaboración." />
+  <meta property="og:url" content="https://asociaciongalileoaltascapacidades.es/contacto.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600;650&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/logo-galileo.png" type="image/png" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <div class="sky-bg" aria-hidden="true"></div>
+  <div class="sky-pattern" aria-hidden="true"></div>
+
   <header class="header">
     <div class="container nav">
       <a class="brand" href="./">
-        <img src="assets/logo-galileo.png" alt="Logo Asociación Galileo" />
-        <strong>Galileo</strong>
+        <img src="assets/logo-galileo.png" alt="" width="40" height="40" />
+        <span class="brand-name">Galileo</span>
       </a>
-      <nav class="menu" aria-label="Principal">
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menu-principal" aria-label="Principal">
         <a href="./#que-es">Altas capacidades</a>
         <a href="./#programas">Programas</a>
+        <a href="juegos.html">Juegos</a>
+        <a href="./#faq">FAQ</a>
         <a href="contacto.html" class="cta" aria-current="page">Contacto</a>
       </nav>
     </div>
@@ -25,43 +43,51 @@
 
   <main class="section">
     <div class="container">
-      <h1>Contacto</h1>
+      <h1 style="font-size:clamp(2rem,4vw,2.6rem);margin:0 0 8px">Te escuchamos</h1>
+      <p class="lead" style="margin-bottom:28px">
+        Para consultas, actividades o colaboración, escríbenos por Instagram. Respondemos lo antes posible.
+      </p>
       <div class="contact-card">
-        <p class="lead">Para consultas, actividades y colaboración, contáctanos por Instagram:</p>
-        <p style="font-size:1.2rem"><strong>Cuenta:</strong> <a href="https://www.instagram.com/altascapacidadesgalileo/" target="_blank" rel="noopener">@altascapacidadesgalileo</a></p>
-        <div class="kpis">
-          <div class="kpi"><b>Respuesta</b><div class="muted">Rápida</div></div>
-          <div class="kpi"><b>Horario</b><div class="muted">Flexible</div></div>
-          <div class="kpi"><b>Canal</b><div class="muted">DM Instagram</div></div>
-        </div>
-        <div style="margin-top:18px">
+        <p class="muted" style="margin:0;font-size:0.85rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber-deep)">Canal principal</p>
+        <p class="ig-handle">
+          <a href="https://www.instagram.com/altascapacidadesgalileo/" target="_blank" rel="noopener">@altascapacidadesgalileo</a>
+        </p>
+        <p class="muted" style="margin:0 0 20px">
+          Cuéntanos la edad de tu hijo o hija y qué buscáis: orientación, talleres o simplemente conocer la asociación.
+        </p>
+        <div class="actions" style="margin-top:0">
           <a class="btn" href="https://www.instagram.com/altascapacidadesgalileo/" target="_blank" rel="noopener">Abrir Instagram</a>
-          <a class="btn alt" href="./">Volver al inicio</a>
+          <a class="btn alt" href="juegos.html">Probar juegos</a>
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="footer section">
+  <footer class="footer">
     <div class="container cols">
       <div>
-        <div style="display:flex; align-items:center; gap:10px">
-          <img src="assets/logo-galileo.png" alt="Logo Galileo" style="width:36px;height:36px;border-radius:50%" />
+        <div class="footer-brand">
+          <img src="assets/logo-galileo.png" alt="" width="36" height="36" />
           <strong>Asociación Galileo</strong>
         </div>
-        <p class="muted">Altas Capacidades • Mancha Centro</p>
+        <p>Altas capacidades · Mancha Centro</p>
       </div>
       <div>
-        <h4>Redes</h4>
+        <h4>Explorar</h4>
         <ul>
-          <li><a href="https://www.instagram.com/altascapacidadesgalileo/" target="_blank" rel="noopener">Instagram @altascapacidadesgalileo</a></li>
+          <li><a href="./">Inicio</a></li>
+          <li><a href="juegos.html">Juegos</a></li>
+          <li><a href="./#faq">FAQ</a></li>
         </ul>
       </div>
       <div>
         <h4>Privacidad</h4>
-        <p class="muted">Sitio informativo sin cookies de terceros ni formularios.</p>
+        <p>Sitio informativo sin cookies de terceros ni formularios.</p>
       </div>
     </div>
+    <div class="container footer-copy">© Asociación Galileo Altas Capacidades</div>
   </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>
