@@ -1491,8 +1491,10 @@ a.cta:hover {
 
   .nav-toggle {
     display: flex;
-    position: relative;
-    z-index: 210;
+  }
+
+  body.nav-open .header {
+    z-index: 220;
   }
 
   .menu {

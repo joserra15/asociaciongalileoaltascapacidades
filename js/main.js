@@ -23,6 +23,7 @@
 
   function setOpen(open) {
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("nav-open", open);
     if (open) {
       parkOnBody();
       menu.classList.add("open");
