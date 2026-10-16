@@ -1185,10 +1185,24 @@ a.cta:hover {
   font-weight: 600;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--ink);
 }
 
-.choice-btn:hover {
-  border-color: var(--teal);
+/* Evita “hover pegajoso” en táctil que parece marcar la respuesta */
+@media (hover: hover) and (pointer: fine) {
+  .choice-btn:hover {
+    border-color: var(--teal);
+  }
+}
+
+.choice-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.choice-btn:focus-visible {
+  box-shadow: var(--ring);
 }
 
 .choice-btn.correct {

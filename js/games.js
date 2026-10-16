@@ -321,13 +321,26 @@
     ];
     let round = 0;
     let score = 0;
+    let locked = false;
 
     const display = el("div", "pattern-display");
     const choices = el("div", "choice-row");
     ui.board.appendChild(display);
     ui.board.appendChild(choices);
 
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+      }
+      return a;
+    }
+
     function load() {
+      locked = false;
       const p = patterns[round % patterns.length];
       ui.status.textContent = "Aciertos " + score + " · Ronda " + (round + 1);
       display.innerHTML = "";
@@ -341,11 +354,18 @@
       });
       choices.innerHTML = "";
       setFeedback(ui.feedback, "¿Qué completa el patrón?", "");
-      p.choices.forEach((c) => {
-        const b = el("button", "choice-btn", c);
+      if (document.activeElement && document.activeElement.blur) {
+        document.activeElement.blur();
+      }
+      shuffle(p.choices).forEach((c) => {
+        const b = el("button", "choice-btn");
         b.type = "button";
+        b.textContent = c;
         b.addEventListener("click", () => {
+          if (locked) return;
+          b.blur();
           if (c === p.answer) {
+            locked = true;
             b.classList.add("correct");
             score++;
             setFeedback(ui.feedback, "¡Correcto!", "ok");
@@ -571,36 +591,74 @@
   /* ---------- 6. Laberinto ---------- */
   function playLaberinto(body) {
     const ui = toolbar(body, "Pasos 0");
-    // 0 path, 1 wall
-    const MAP = [
-      [0, 1, 0, 0, 0, 1, 0, 0, 0],
-      [0, 1, 0, 1, 0, 1, 0, 1, 0],
-      [0, 0, 0, 1, 0, 0, 0, 1, 0],
-      [1, 1, 0, 1, 1, 1, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 1, 0],
-      [0, 1, 1, 1, 0, 1, 1, 1, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0, 0],
-      [1, 1, 0, 1, 1, 1, 0, 1, 1],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-    const ROWS = MAP.length;
-    const COLS = MAP[0].length;
-    const START = [0, 0];
-    const END = [8, 8];
-    let pos = [...START];
+    // Odd size so recursive-backtracker leaves a clean corridor grid
+    const SIZE = 11;
+    let MAP = [];
+    let START = [0, 0];
+    let END = [SIZE - 1, SIZE - 1];
+    let pos = [0, 0];
     let steps = 0;
-    let pathSet = new Set(["0,0"]);
+    let pathSet = new Set();
+    let finished = false;
 
     function key(r, c) {
       return r + "," + c;
     }
 
+    function shuffleDirs(dirs) {
+      for (let i = dirs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = dirs[i];
+        dirs[i] = dirs[j];
+        dirs[j] = t;
+      }
+      return dirs;
+    }
+
+    /** Perfect maze via recursive backtracking (0 = path, 1 = wall). */
+    function generateMaze() {
+      const n = SIZE;
+      const grid = Array.from({ length: n }, () => Array(n).fill(1));
+      const stack = [[0, 0]];
+      grid[0][0] = 0;
+
+      while (stack.length) {
+        const [r, c] = stack[stack.length - 1];
+        const neighbors = shuffleDirs([
+          [r - 2, c],
+          [r + 2, c],
+          [r, c - 2],
+          [r, c + 2],
+        ]).filter(([nr, nc]) => nr >= 0 && nr < n && nc >= 0 && nc < n && grid[nr][nc] === 1);
+
+        if (!neighbors.length) {
+          stack.pop();
+          continue;
+        }
+        const [nr, nc] = neighbors[0];
+        grid[(r + nr) / 2][(c + nc) / 2] = 0;
+        grid[nr][nc] = 0;
+        stack.push([nr, nc]);
+      }
+
+      // Guarantee start/end are open (already are on odd grid corners)
+      grid[0][0] = 0;
+      grid[n - 1][n - 1] = 0;
+      // If end got isolated (shouldn't with odd n), carve a short path from nearest open cell
+      if (grid[n - 1][n - 1] === 1) grid[n - 1][n - 1] = 0;
+      if (grid[n - 2][n - 1] === 1 && grid[n - 1][n - 2] === 1) {
+        grid[n - 2][n - 1] = 0;
+      }
+
+      return grid;
+    }
+
     function draw() {
       ui.board.innerHTML = "";
       const g = el("div", "maze-grid");
-      g.style.gridTemplateColumns = "repeat(" + COLS + ", 28px)";
-      for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
+      g.style.gridTemplateColumns = "repeat(" + SIZE + ", 26px)";
+      for (let r = 0; r < SIZE; r++) {
+        for (let c = 0; c < SIZE; c++) {
           const cell = el("button", "maze-cell");
           cell.type = "button";
           if (MAP[r][c] === 1) {
@@ -620,7 +678,7 @@
     }
 
     function tryMove(r, c) {
-      if (MAP[r][c] === 1) return;
+      if (finished || MAP[r][c] === 1) return;
       const dr = Math.abs(r - pos[0]);
       const dc = Math.abs(c - pos[1]);
       if (dr + dc !== 1) {
@@ -632,6 +690,7 @@
       pathSet.add(key(r, c));
       ui.status.textContent = "Pasos " + steps;
       if (r === END[0] && c === END[1]) {
+        finished = true;
         setFeedback(ui.feedback, "¡Saliste del laberinto en " + steps + " pasos!", "ok");
       } else {
         setFeedback(ui.feedback, "", "");
@@ -646,13 +705,17 @@
       e.preventDefault();
       const nr = pos[0] + d[0];
       const nc = pos[1] + d[1];
-      if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) tryMove(nr, nc);
+      if (nr >= 0 && nr < SIZE && nc >= 0 && nc < SIZE) tryMove(nr, nc);
     }
 
     function init() {
+      MAP = generateMaze();
+      START = [0, 0];
+      END = [SIZE - 1, SIZE - 1];
       pos = [...START];
       steps = 0;
-      pathSet = new Set(["0,0"]);
+      finished = false;
+      pathSet = new Set([key(START[0], START[1])]);
       ui.status.textContent = "Pasos 0";
       setFeedback(ui.feedback, "Pulsa casillas vecinas o usa las flechas del teclado.", "");
       draw();
@@ -677,22 +740,42 @@
     ];
     let i = 0;
     let score = 0;
+    let locked = false;
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let j = a.length - 1; j > 0; j--) {
+        const k = Math.floor(Math.random() * (j + 1));
+        const t = a[j];
+        a[j] = a[k];
+        a[k] = t;
+      }
+      return a;
+    }
 
     function load() {
+      locked = false;
       const item = items[i % items.length];
       ui.status.textContent = "Aciertos " + score;
       ui.board.innerHTML = "";
+      if (document.activeElement && document.activeElement.blur) {
+        document.activeElement.blur();
+      }
       const q = el("div", "pattern-display");
       q.style.fontSize = "1.25rem";
       q.textContent = item.q;
       ui.board.appendChild(q);
       const row = el("div", "choice-row");
-      item.opts.forEach((o) => {
-        const b = el("button", "choice-btn", o);
+      shuffle(item.opts).forEach((o) => {
+        const b = el("button", "choice-btn");
         b.type = "button";
+        b.textContent = o;
         b.style.fontSize = "1rem";
         b.addEventListener("click", () => {
+          if (locked) return;
+          b.blur();
           if (o === item.a) {
+            locked = true;
             b.classList.add("correct");
             score++;
             setFeedback(ui.feedback, "¡Correcto!", "ok");
