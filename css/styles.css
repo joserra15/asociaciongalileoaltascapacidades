@@ -1834,6 +1834,11 @@ a.cta:hover {
   flex-shrink: 0;
 }
 
+.steps-list strong,
+.steps-list span {
+  grid-column: 2;
+}
+
 .steps-list strong {
   display: block;
   font-family: var(--font-display);
@@ -1843,6 +1848,7 @@ a.cta:hover {
 }
 
 .steps-list span {
+  display: block;
   color: var(--muted);
   font-size: 0.95rem;
 }
