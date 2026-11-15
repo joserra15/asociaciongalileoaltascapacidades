@@ -1886,6 +1886,11 @@ a.cta:hover {
   margin-top: 2px;
 }
 
+.activity-list strong,
+.activity-list span {
+  grid-column: 2;
+}
+
 .activity-list strong {
   display: block;
   font-family: var(--font-display);
