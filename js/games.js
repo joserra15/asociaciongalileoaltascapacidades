@@ -96,37 +96,33 @@
   let catFilter = "all";
   let activeCleanup = null;
 
+  function bindStaticCards() {
+    grid.querySelectorAll(".game-card[data-id]").forEach((btn) => {
+      if (btn.dataset.bound === "1") return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", () => {
+        const g = GAMES.find((item) => item.id === btn.dataset.id);
+        if (g) openGame(g);
+      });
+    });
+  }
+
   function renderCards() {
-    grid.innerHTML = "";
+    if (!grid) return;
+    bindStaticCards();
     let visible = 0;
 
-    GAMES.forEach((g) => {
-      const ageOk = ageFilter === "all" || g.ages.includes(ageFilter);
-      const catOk = catFilter === "all" || g.cat === catFilter;
-      if (!ageOk || !catOk) return;
-
-      visible++;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "game-card";
-      btn.dataset.id = g.id;
-      btn.innerHTML =
-        '<span class="game-cat">' +
-        g.catLabel +
-        "</span><h3>" +
-        g.title +
-        "</h3><p>" +
-        g.blurb +
-        '</p><div class="game-ages">' +
-        g.ages
-          .map((a) => "<span>" + (a === "13" ? "13+" : a) + "</span>")
-          .join("") +
-        "</div>";
-      btn.addEventListener("click", () => openGame(g));
-      grid.appendChild(btn);
+    grid.querySelectorAll(".game-card[data-id]").forEach((btn) => {
+      const ages = (btn.dataset.ages || "").split(",").filter(Boolean);
+      const cat = btn.dataset.cat || "";
+      const ageOk = ageFilter === "all" || ages.includes(ageFilter);
+      const catOk = catFilter === "all" || cat === catFilter;
+      const show = ageOk && catOk;
+      btn.hidden = !show;
+      if (show) visible++;
     });
 
-    empty.classList.toggle("show", visible === 0);
+    if (empty) empty.classList.toggle("show", visible === 0);
   }
 
   function openGame(g) {
@@ -393,7 +389,11 @@
   function playCuadrados(body) {
     const ui = toolbar(body, "¿Cuántos?");
     const img = el("img", "squares-img");
-    img.src = "assets/reto-cuadrados.png";
+    img.src = "assets/reto-cuadrados.webp";
+    img.onerror = function () {
+      img.onerror = null;
+      img.src = "assets/reto-cuadrados.png";
+    };
     img.alt = "Puzzle de cuadrados para contar";
     ui.board.appendChild(img);
 

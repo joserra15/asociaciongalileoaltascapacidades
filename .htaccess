@@ -1,0 +1,6 @@
+Options -Indexes
+ErrorDocument 404 /404.html
+
+# Prefer clean home URL
+RewriteEngine On
+RewriteRule ^index\.html$ / [R=301,L]

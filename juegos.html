@@ -3,30 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Juegos para niños con altas capacidades | Asociación Galileo</title>
-  <meta name="description" content="Juegos interactivos de lógica, visoespacial, memoria y pensamiento lateral por edades. Pensados para mentes con altas capacidades." />
+  <title>Juegos de lógica para altas capacidades | Asociación Galileo</title>
+  <meta name="description" content="Juegos interactivos de lógica, visoespacial, memoria y pensamiento lateral por edades (6–8, 9–12, 13+). Pensados para mentes con altas capacidades." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1a3a5c" />
   <link rel="canonical" href="https://asociaciongalileoaltascapacidades.es/juegos.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Juegos AACC | Asociación Galileo" />
-  <meta property="og:description" content="Retos de lógica, visoespacial y más, filtrados por edad. Para mentes curiosas." />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Asociación Galileo Altas Capacidades" />
+  <meta property="og:title" content="Juegos de lógica AACC | Asociación Galileo" />
+  <meta property="og:description" content="Retos de lógica, visoespacial, memoria y pensamiento lateral filtrados por edad." />
   <meta property="og:url" content="https://asociaciongalileoaltascapacidades.es/juegos.html" />
-  <meta property="og:image" content="https://asociaciongalileoaltascapacidades.es/assets/logo-galileo-oficial.png" />
+  <meta property="og:image" content="https://asociaciongalileoaltascapacidades.es/assets/og-galileo.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Juegos para altas capacidades — Asociación Galileo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Juegos de lógica AACC | Asociación Galileo" />
+  <meta name="twitter:description" content="Retos de lógica, visoespacial y más, filtrados por edad." />
+  <meta name="twitter:image" content="https://asociaciongalileoaltascapacidades.es/assets/og-galileo.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Juegos interactivos para altas capacidades",
+    "url": "https://asociaciongalileoaltascapacidades.es/juegos.html",
+    "description": "Juegos de lógica, visoespacial, memoria y pensamiento lateral por edades.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Asociación Galileo Altas Capacidades",
+      "url": "https://asociaciongalileoaltascapacidades.es/"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Secuencia secreta", "description": "Memoriza y repite la secuencia de colores. Cada ronda añade un paso más."},
+        {"@type": "ListItem", "position": 2, "name": "Encuentra la figura", "description": "Observa el patrón y elige la pieza que lo completa."},
+        {"@type": "ListItem", "position": 3, "name": "Contar cuadrados", "description": "¿Cuántos cuadrados hay en el dibujo? Cuenta con cuidado."},
+        {"@type": "ListItem", "position": 4, "name": "Memoria de símbolos", "description": "Encuentra las parejas de símbolos del observatorio."},
+        {"@type": "ListItem", "position": 5, "name": "Torres de Hanoi", "description": "Mueve la torre al último poste respetando las reglas."},
+        {"@type": "ListItem", "position": 6, "name": "Laberinto mental", "description": "Llega del punto teal al ámbar planificando la ruta."},
+        {"@type": "ListItem", "position": 7, "name": "Analogías y series", "description": "Completa la serie: ¿qué figura o número sigue?"},
+        {"@type": "ListItem", "position": 8, "name": "Interruptor y bombillas", "description": "Acertijo clásico de pensamiento lateral con interruptores y bombillas."}
+      ]
+    }
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/logo-galileo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div class="sky-bg" aria-hidden="true"></div>
   <div class="sky-pattern" aria-hidden="true"></div>
 
   <header class="header">
     <div class="container nav">
       <a class="brand" href="./" aria-label="Asociación Galileo — Inicio">
-        <img class="brand-logo" src="assets/logo-galileo-oficial.png" alt="Galileo — Asociación de Altas Capacidades Intelectuales" width="200" height="73" />
+        <picture>
+          <source srcset="assets/logo-galileo-oficial.webp" type="image/webp" />
+          <img class="brand-logo" src="assets/logo-galileo-oficial.png" alt="Galileo — Asociación de Altas Capacidades Intelectuales" width="200" height="73" />
+        </picture>
       </a>
       <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
         <span></span><span></span><span></span>
@@ -42,13 +86,13 @@
     </div>
   </header>
 
-  <main>
+  <main id="contenido">
     <section class="games-hero">
       <div class="container">
         <p class="eyebrow">Zona para mentes curiosas</p>
-        <h1>Juegos interactivos</h1>
+        <h1>Juegos interactivos para altas capacidades</h1>
         <p class="lead">
-          Lógica, visoespacial, memoria y pensamiento lateral. Filtra por edad o categoría y elige un reto.
+          Lógica, visoespacial, memoria y pensamiento lateral. Filtra por edad o categoría y elige un reto. Pensados para familias de Mancha Centro y para cualquiera que quiera ejercitar el razonamiento.
         </p>
       </div>
     </section>
@@ -85,7 +129,56 @@
       </aside>
 
       <div>
-        <div class="games-grid" id="games-grid"></div>
+        <div class="games-grid" id="games-grid">
+          <button type="button" class="game-card" data-id="secuencia" data-ages="6-8,9-12" data-cat="memoria">
+            <span class="game-cat">Memoria / lógica</span>
+            <h3>Secuencia secreta</h3>
+            <p>Memoriza y repite la secuencia de colores. Cada ronda añade un paso más.</p>
+            <div class="game-ages"><span>6–8</span><span>9–12</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="figura" data-ages="6-8,9-12" data-cat="visoespacial">
+            <span class="game-cat">Visoespacial</span>
+            <h3>Encuentra la figura</h3>
+            <p>Observa el patrón y elige la pieza que lo completa.</p>
+            <div class="game-ages"><span>6–8</span><span>9–12</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="cuadrados" data-ages="6-8,9-12,13" data-cat="visoespacial">
+            <span class="game-cat">Visoespacial</span>
+            <h3>Contar cuadrados</h3>
+            <p>¿Cuántos cuadrados hay en el dibujo? Cuenta con cuidado.</p>
+            <div class="game-ages"><span>6–8</span><span>9–12</span><span>13+</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="simbolos" data-ages="6-8,9-12" data-cat="memoria">
+            <span class="game-cat">Memoria de trabajo</span>
+            <h3>Memoria de símbolos</h3>
+            <p>Encuentra las parejas de símbolos del observatorio.</p>
+            <div class="game-ages"><span>6–8</span><span>9–12</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="hanoi" data-ages="9-12,13" data-cat="logica">
+            <span class="game-cat">Lógica / planificación</span>
+            <h3>Torres de Hanoi</h3>
+            <p>Mueve la torre al último poste. Solo puedes poner un disco más pequeño sobre uno mayor.</p>
+            <div class="game-ages"><span>9–12</span><span>13+</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="laberinto" data-ages="9-12,13" data-cat="visoespacial">
+            <span class="game-cat">Visoespacial</span>
+            <h3>Laberinto mental</h3>
+            <p>Llega del punto teal al ámbar. Pulsa celdas adyacentes para avanzar.</p>
+            <div class="game-ages"><span>9–12</span><span>13+</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="series" data-ages="9-12,13" data-cat="logica">
+            <span class="game-cat">Lógica</span>
+            <h3>Analogías y series</h3>
+            <p>Completa la serie: ¿qué figura o número sigue?</p>
+            <div class="game-ages"><span>9–12</span><span>13+</span></div>
+          </button>
+          <button type="button" class="game-card" data-id="bombillas" data-ages="13" data-cat="lateral">
+            <span class="game-cat">Pensamiento lateral</span>
+            <h3>Interruptor y bombillas</h3>
+            <p>Tres interruptores, tres bombillas. Solo puedes entrar una vez. ¿Lo resuelves?</p>
+            <div class="game-ages"><span>13+</span></div>
+          </button>
+        </div>
         <p class="games-empty" id="games-empty">No hay juegos con estos filtros. Prueba otra combinación.</p>
       </div>
     </div>
@@ -108,12 +201,20 @@
     <div class="container cols">
       <div>
         <div class="footer-brand">
-          <img src="assets/logo-galileo-oficial.png" alt="Galileo" width="180" height="66" />
+          <picture>
+            <source srcset="assets/logo-galileo-oficial.webp" type="image/webp" />
+            <img src="assets/logo-galileo-oficial.png" alt="Galileo — Asociación de Altas Capacidades Intelectuales" width="180" height="66" loading="lazy" />
+          </picture>
         </div>
         <p>Altas capacidades · Mancha Centro</p>
+        <p class="footer-nap">
+          Centro Cívico Plaza de España, Alcázar de San Juan (Ciudad Real)<br />
+          <a href="tel:+34675108804">675 108 804</a> ·
+          <a href="mailto:altascapacidadesgalileo@gmail.com">altascapacidadesgalileo@gmail.com</a>
+        </p>
       </div>
       <div>
-        <h4>Explorar</h4>
+        <p class="footer-heading">Explorar</p>
         <ul>
           <li><a href="./#primeros-pasos">Primeros pasos</a></li>
           <li><a href="./#actividades">Actividades</a></li>
@@ -123,12 +224,14 @@
         </ul>
       </div>
       <div>
-        <h4>Contacto</h4>
+        <p class="footer-heading">Contacto</p>
         <ul>
-          <li><a href="mailto:altascapacidadesgalileo@gmail.com">Gmail</a></li>
+          <li><a href="mailto:altascapacidadesgalileo@gmail.com">Email</a></li>
+          <li><a href="tel:+34675108804">675 108 804</a></li>
           <li><a href="https://www.instagram.com/altascapacidadesgalileo/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.facebook.com/altascapacidadesgalileo" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="contacto.html">Formulario</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
         </ul>
       </div>
     </div>
