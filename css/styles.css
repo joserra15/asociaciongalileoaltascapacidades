@@ -40,6 +40,8 @@
   --font-display: "Nunito", system-ui, sans-serif;
   --font-body: "Outfit", system-ui, sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hero-wash: color-mix(in oklab, var(--paper) 76%, color-mix(in oklab, var(--violet) 62%, var(--cyan)));
+  --lavender: #9b7fd4;
 }
 
 *,
@@ -67,6 +69,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 106.25%;
 }
 
 body {
@@ -103,19 +106,53 @@ a:hover {
   position: fixed;
   inset: 0;
   z-index: -2;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 45% at 8% 0%, rgba(43, 179, 192, 0.14), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 92% 8%, rgba(241, 90, 36, 0.12), transparent 50%),
-    radial-gradient(ellipse 50% 35% at 50% 100%, rgba(74, 43, 134, 0.08), transparent 55%),
-    linear-gradient(180deg, #ffffff 0%, var(--paper) 55%, #f3f0fa 100%);
+    radial-gradient(ellipse 75% 50% at 6% 18%, rgba(155, 127, 212, 0.26), transparent 58%),
+    radial-gradient(ellipse 55% 42% at 18% 72%, rgba(241, 90, 36, 0.22), transparent 55%),
+    radial-gradient(ellipse 48% 38% at 42% 48%, rgba(43, 179, 192, 0.24), transparent 52%),
+    radial-gradient(ellipse 62% 48% at 88% 22%, rgba(241, 90, 36, 0.28), transparent 54%),
+    radial-gradient(ellipse 45% 40% at 72% 68%, rgba(74, 43, 134, 0.2), transparent 55%),
+    radial-gradient(ellipse 55% 35% at 50% 100%, rgba(30, 33, 113, 0.1), transparent 58%),
+    linear-gradient(
+      165deg,
+      color-mix(in oklab, var(--paper) 88%, var(--violet)) 0%,
+      color-mix(in oklab, var(--paper) 82%, var(--cyan)) 45%,
+      color-mix(in oklab, #f3f0fa 85%, var(--orange)) 100%
+    );
   pointer-events: none;
+}
+
+.sky-bg::before,
+.sky-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  pointer-events: none;
+}
+
+.sky-bg::before {
+  width: min(62vw, 520px);
+  height: min(62vw, 520px);
+  left: -12%;
+  top: 8%;
+  background: radial-gradient(circle, rgba(155, 127, 212, 0.42) 0%, rgba(74, 43, 134, 0.22) 45%, transparent 72%);
+}
+
+.sky-bg::after {
+  width: min(50vw, 440px);
+  height: min(50vw, 440px);
+  right: -8%;
+  top: 4%;
+  background: radial-gradient(circle, rgba(241, 90, 36, 0.38) 0%, rgba(241, 90, 36, 0.12) 50%, transparent 75%);
 }
 
 .sky-pattern {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.045;
+  opacity: 0.03;
   background-image: url("../assets/pattern.svg");
   background-size: 140px;
   pointer-events: none;
@@ -145,7 +182,7 @@ a:hover {
 }
 
 .lead {
-  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-size: clamp(1.12rem, 1.7vw, 1.28rem);
   color: var(--muted);
   max-width: 58ch;
 }
@@ -162,12 +199,12 @@ h3,
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  font-size: clamp(1.85rem, 3.7vw, 2.55rem);
   margin: 0 0 12px;
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.28rem;
   margin: 0 0 8px;
 }
 
@@ -182,7 +219,7 @@ h3 {
 }
 
 .eyebrow {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -196,8 +233,8 @@ h3 {
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  backdrop-filter: blur(14px) saturate(1.1);
-  background: color-mix(in oklab, #fff 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.15);
+  background: color-mix(in oklab, #fff 72%, transparent);
   border-bottom: 1px solid var(--line);
 }
 
@@ -245,7 +282,7 @@ h3 {
   padding: 8px 12px;
   border-radius: var(--r-sm);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: background 0.2s var(--ease), color 0.2s;
 }
 
@@ -329,7 +366,7 @@ a.cta:hover {
   border-radius: 999px;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s var(--ease), background 0.2s, box-shadow 0.2s;
@@ -388,7 +425,7 @@ a.cta:hover {
   align-items: center;
   padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 88px);
   overflow: hidden;
-  background: linear-gradient(135deg, #f7f4ff 0%, #fff5ef 50%, #eef9fb 100%);
+  background: var(--hero-wash);
 }
 
 .hero-media {
@@ -411,7 +448,13 @@ a.cta:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 42%, rgba(255, 255, 255, 0.35) 68%, transparent 100%);
+  background: linear-gradient(
+    105deg,
+    color-mix(in oklab, var(--paper) 90%, var(--violet)) 0%,
+    color-mix(in oklab, var(--paper) 78%, var(--cyan)) 38%,
+    color-mix(in oklab, var(--paper) 42%, transparent) 62%,
+    transparent 100%
+  );
   z-index: 1;
   pointer-events: none;
 }
@@ -424,7 +467,7 @@ a.cta:hover {
 
 .hero-tag {
   display: inline-block;
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -434,7 +477,7 @@ a.cta:hover {
 }
 
 .hero h1 {
-  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  font-size: clamp(1.5rem, 3.1vw, 2.05rem);
   font-weight: 700;
   color: var(--ink);
   margin: 0 0 16px;
@@ -443,7 +486,7 @@ a.cta:hover {
 }
 
 .hero .hero-lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  font-size: clamp(1.12rem, 1.95vw, 1.35rem);
   color: var(--muted);
   max-width: 42ch;
   margin: 0;
